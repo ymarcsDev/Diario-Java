@@ -1,0 +1,51 @@
+// Classe que representa o conceito de um dispositivo (Abstração)
+class SmartDevice {
+    private String name;
+    private boolean isOn;
+
+    // Construtor para inicializar o objeto
+    public SmartDevice(String name) {
+        this.name = name;
+        this.isOn = false; // Por padrão, começa desligado
+    }
+
+    // Método para ligar o dispositivo
+    public void turnOn() {
+        isOn = true;
+        System.out.println(name + " está agora LIGADO.");
+    }
+
+    // Método para desligar o dispositivo
+    public void turnOff() {
+        isOn = false;
+        System.out.println(name + " está agora DESLIGADO.");
+    }
+
+    // Método para mostrar o status atual (Encapsulamento)
+    public void showStatus() {
+        String status = isOn ? "Ligado" : "Desligado";
+        System.out.println("Dispositivo: " + name + " | Status: " + status);
+    }
+}
+
+// Classe principal para executar o código
+public class Main {
+    public static void main(String[] args) {
+        // Criando (instanciando) objetos da classe SmartDevice
+        SmartDevice lampada = new SmartDevice("Lâmpada da Sala");
+        SmartDevice arCondicionado = new SmartDevice("Ar Condicionado");
+
+        System.out.println("--- Iniciando Automação Residencial ---");
+
+        // Manipulando os objetos
+        lampada.turnOn();
+        arCondicionado.turnOn();
+        
+        lampada.showStatus();
+        arCondicionado.showStatus();
+
+        System.out.println("\n--- Encerrando o dia ---");
+        lampada.turnOff();
+        lampada.showStatus();
+    }
+}

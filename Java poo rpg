@@ -1,0 +1,52 @@
+// Classe que representa a lógica de um herói no jogo
+class Hero {
+    private String name;
+    private String job; // Classe do personagem (Guerreiro, Mago, etc.)
+    private int level;
+    private int health;
+
+    // Construtor: Inicializa o herói com valores padrão
+    public Hero(String name, String job) {
+        this.name = name;
+        this.job = job;
+        this.level = 1;
+        this.health = 100;
+    }
+
+    // Método para subir de nível (Lógica de Negócio)
+    public void levelUp() {
+        this.level++;
+        this.health += 20; // Ganha vida ao subir de nível
+        System.out.println("⭐ " + name + " subiu para o nível " + level + "!");
+    }
+
+    // Método para receber dano com verificação
+    public void takeDamage(int damage) {
+        this.health -= damage;
+        if (this.health < 0) this.health = 0;
+        System.out.println("💢 " + name + " recebeu " + damage + " de dano. Vida restante: " + health);
+    }
+
+    // Exibe o status atual do objeto
+    public void displayStats() {
+        System.out.println("\n--- Status do Herói ---");
+        System.out.println("Nome: " + name + " | Classe: " + job);
+        System.out.println("Nível: " + level + " | Vida: " + health);
+        System.out.println("-----------------------\n");
+    }
+}
+
+public class CharacterSystem {
+    public static void main(String[] args) {
+        // Instanciando o herói
+        Hero player = new Hero("Aragorn", "Guerreiro");
+
+        player.displayStats();
+        
+        // Simulando jogabilidade
+        player.takeDamage(30);
+        player.levelUp();
+        
+        player.displayStats();
+    }
+}

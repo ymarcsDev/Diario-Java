@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+public class CaixaEletronico {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        double saldo = 1000.0;
+        int opcao = -1;
+
+        System.out.println("=== Caixa Eletrônico ===");
+
+        while (opcao != 4) {
+            System.out.println("\nEscolha uma opção:");
+            System.out.println("1 - Consultar saldo");
+            System.out.println("2 - Sacar dinheiro");
+            System.out.println("3 - Depositar dinheiro");
+            System.out.println("4 - Sair");
+
+            System.out.print("Opção: ");
+            opcao = scanner.nextInt();
+
+            if (opcao == 1) {
+                System.out.println("Seu saldo atual é: R$ " + saldo);
+
+            } else if (opcao == 2) {
+                System.out.print("Digite o valor para saque: ");
+                double saque = scanner.nextDouble();
+
+                if (saque <= 0) {
+                    System.out.println("Valor inválido!");
+                } else if (saque > saldo) {
+                    System.out.println("Saldo insuficiente!");
+                } else {
+                    saldo -= saque;
+                    System.out.println("Saque realizado com sucesso!");
+                }
+
+            } else if (opcao == 3) {
+                System.out.print("Digite o valor para depósito: ");
+                double deposito = scanner.nextDouble();
+
+                if (deposito <= 0) {
+                    System.out.println("Valor inválido!");
+                } else {
+                    saldo += deposito;
+                    System.out.println("Depósito realizado com sucesso!");
+                }
+
+            } else if (opcao == 4) {
+                System.out.println("Saindo... Obrigado por usar o sistema!");
+
+            } else {
+                System.out.println("Opção inválida!");
+            }
+        }
+
+        scanner.close();
+    }
+}

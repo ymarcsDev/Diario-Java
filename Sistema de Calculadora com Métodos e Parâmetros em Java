@@ -1,0 +1,49 @@
+public class Calculadora {
+
+    // Método com parâmetros e retorno
+    public int somar(int a, int b) {
+        return a + b;
+    }
+
+    // Método com parâmetros e retorno
+    public int subtrair(int a, int b) {
+        return a - b;
+    }
+
+    // Método com parâmetros e retorno
+    public int multiplicar(int a, int b) {
+        return a * b;
+    }
+
+    // Método com parâmetros e retorno
+    public double dividir(double a, double b) {
+        if (b == 0) {
+            System.out.println("Não é possível dividir por zero.");
+            return 0;
+        }
+        return a / b;
+    }
+
+    // Método com parâmetros, mas sem retorno (void)
+    public void exibirResultado(String operacao, double resultado) {
+        System.out.println("Resultado da " + operacao + ": " + resultado);
+    }
+
+    public static void main(String[] args) {
+
+        // Criando objeto da classe Calculadora
+        Calculadora calc = new Calculadora();
+
+        // Chamando métodos com parâmetros
+        int soma = calc.somar(10, 5);
+        int subtracao = calc.subtrair(10, 5);
+        int multiplicacao = calc.multiplicar(10, 5);
+        double divisao = calc.dividir(10, 5);
+
+        // Exibindo resultados
+        calc.exibirResultado("soma", soma);
+        calc.exibirResultado("subtração", subtracao);
+        calc.exibirResultado("multiplicação", multiplicacao);
+        calc.exibirResultado("divisão", divisao);
+    }
+}

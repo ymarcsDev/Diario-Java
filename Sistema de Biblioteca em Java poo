@@ -1,0 +1,92 @@
+import java.util.ArrayList;
+
+class Livro {
+
+    private String titulo;
+    private String autor;
+    private boolean disponivel;
+
+    // Construtor
+    public Livro(String titulo, String autor) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.disponivel = true;
+    }
+
+    // Método com parâmetro
+    public void emprestar(String nomeUsuario) {
+
+        if (disponivel) {
+            disponivel = false;
+
+            System.out.println("Livro \"" + titulo + "\" emprestado para " + nomeUsuario);
+        } else {
+            System.out.println("O livro " + titulo + " não está disponível.");
+        }
+    }
+
+    // Método com parâmetro
+    public void devolver(String nomeUsuario) {
+
+        disponivel = true;
+
+        System.out.println(nomeUsuario + " devolveu o livro " + titulo);
+    }
+
+    public void exibirInformacoes() {
+
+        System.out.println("\nTítulo: " + titulo);
+        System.out.println("Autor: " + autor);
+
+        if (disponivel) {
+            System.out.println("Status: Disponível");
+        } else {
+            System.out.println("Status: Emprestado");
+        }
+    }
+}
+
+class Biblioteca {
+
+    private ArrayList<Livro> livros = new ArrayList<>();
+
+    // Método com parâmetro
+    public void adicionarLivro(Livro livro) {
+        livros.add(livro);
+
+        System.out.println("Livro adicionado com sucesso!");
+    }
+
+    public void listarLivros() {
+
+        System.out.println("\n===== LIVROS DA BIBLIOTECA =====");
+
+        for (Livro livro : livros) {
+            livro.exibirInformacoes();
+        }
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Biblioteca biblioteca = new Biblioteca();
+
+        Livro livro1 = new Livro("Dom Casmurro", "Machado de Assis");
+        Livro livro2 = new Livro("Clean Code", "Robert Martin");
+
+        biblioteca.adicionarLivro(livro1);
+        biblioteca.adicionarLivro(livro2);
+
+        biblioteca.listarLivros();
+
+        livro1.emprestar("Marcos");
+
+        biblioteca.listarLivros();
+
+        livro1.devolver("Marcos");
+
+        biblioteca.listarLivros();
+    }
+}

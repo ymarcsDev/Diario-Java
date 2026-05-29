@@ -1,0 +1,86 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.OptionalDouble;
+
+class Funcionario {
+    private String nome;
+    private String cargo;
+    private double salario;
+    private int idade;
+
+    public Funcionario(String nome, String cargo, double salario, int idade) {
+        this.nome = nome;
+        this.cargo = cargo;
+        this.salario = salario;
+        this.idade = idade;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    @Override
+    public String toString() {
+        return nome + " | " + cargo + " | R$" + salario + " | " + idade + " anos";
+    }
+}
+
+class Empresa {
+
+    // Método com retorno "difícil"
+    public static Funcionario encontrarFuncionarioMaisValioso(List<Funcionario> funcionarios) {
+
+        OptionalDouble mediaSalarios = funcionarios
+                .stream()
+                .mapToDouble(Funcionario::getSalario)
+                .average();
+
+        if (mediaSalarios.isEmpty()) {
+            return null;
+        }
+
+        double media = mediaSalarios.getAsDouble();
+
+        return funcionarios
+                .stream()
+                .filter(f -> f.getSalario() >= media)
+                .max(Comparator.comparingDouble(
+                        f -> (f.getSalario() * 0.7) + (f.getIdade() * 0.3)
+                ))
+                .orElse(null);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<Funcionario> funcionarios = new ArrayList<>();
+
+        funcionarios.add(new Funcionario("Marcos", "Backend Java", 4500, 19));
+        funcionarios.add(new Funcionario("Ana", "DevOps", 7000, 28));
+        funcionarios.add(new Funcionario("Carlos", "Frontend", 5000, 22));
+        funcionarios.add(new Funcionario("Julia", "Tech Lead", 9500, 35));
+
+        Funcionario melhor = Empresa.encontrarFuncionarioMaisValioso(funcionarios);
+
+        if (melhor != null) {
+            System.out.println("Funcionario mais valioso:");
+            System.out.println(melhor);
+        } else {
+            System.out.println("Nenhum funcionario encontrado.");
+        }
+    }
+}
